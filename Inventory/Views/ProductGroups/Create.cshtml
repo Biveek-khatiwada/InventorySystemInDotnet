@@ -1,0 +1,12 @@
+@model Inventory.Models.ProductGroup
+@{ ViewData["Title"] = "New"; }
+<h1>New Product Group</h1>
+<form method="post" class="form">
+    <div class="row"><label>Name</label><input asp-for="Name" required/></div>
+    
+    <div class="row"><label>Description</label><textarea asp-for="Description"></textarea></div>
+    <div class="row"><label>Status</label>
+        <select asp-for="Status" asp-items="Html.GetEnumSelectList<Inventory.Models.Status>()"></select></div>
+    <div class="actions"><button class="btn btn-primary">Save</button>
+        <a class="btn btn-secondary" asp-action="Index">Cancel</a></div>
+</form>

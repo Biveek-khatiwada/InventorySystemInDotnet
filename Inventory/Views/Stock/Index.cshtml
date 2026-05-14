@@ -1,0 +1,18 @@
+@model List<Inventory.Controllers.StockController.StockRow>
+@{ ViewData["Title"] = "Current Stock";
+   var grand = Model.Sum(r => r.TotalAmount); }
+<div class="toolbar"><h1>Current Stock</h1></div>
+<table>
+<thead><tr><th>Product</th><th>Unit</th><th class="num">Quantity</th><th class="num">Avg Rate</th><th class="num">Total Amount</th></tr></thead>
+<tbody>
+@foreach (var r in Model) {
+<tr>
+    <td>@r.ProductName</td><td>@r.Unit</td>
+    <td class="num">@r.Quantity</td>
+    <td class="num">@r.AverageRate.ToString("0.00")</td>
+    <td class="num">@r.TotalAmount.ToString("0.00")</td>
+</tr>}
+</tbody>
+<tfoot><tr><th colspan="4" class="num">Grand Total</th><th class="num">@grand.ToString("0.00")</th></tr></tfoot>
+</table>
+<p class="muted" style="margin-top:1rem">Quantity = Σ purchases − Σ sales. Avg rate = total purchase amount ÷ total purchased qty. Total = remaining qty × avg rate.</p>

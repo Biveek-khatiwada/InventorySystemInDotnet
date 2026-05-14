@@ -1,0 +1,15 @@
+@model IEnumerable<Inventory.Models.Sale>
+@{ ViewData["Title"] = "Sales"; }
+<div class="toolbar"><h1>Sales</h1><a class="btn btn-primary" asp-action="Create">+ New Sale</a></div>
+<table>
+<thead><tr><th>#</th><th>Date</th><th>Customer</th><th>Total</th><th>By</th><th></th></tr></thead>
+<tbody>
+@foreach (var s in Model) {
+<tr>
+    <td>@s.Id</td><td>@s.Date.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</td>
+    <td>@(s.Customer?.Name ?? "(walk-in)")</td>
+    <td>@s.TotalAmount.ToString("0.00")</td>
+    <td>@s.User?.Name</td>
+    <td><a asp-action="Details" asp-route-id="@s.Id">View</a></td>
+</tr>}
+</tbody></table>

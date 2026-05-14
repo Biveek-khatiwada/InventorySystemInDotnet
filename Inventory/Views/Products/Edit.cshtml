@@ -1,0 +1,23 @@
+@model Inventory.Models.Product
+@{ ViewData["Title"] = "Edit Product";
+   var units = ViewBag.Units as List<Inventory.Models.UnitOfMeasure>;
+   var groups = ViewBag.Groups as List<Inventory.Models.ProductGroup>; }
+<h1>Edit Product</h1>
+<form method="post" class="form">
+    <div class="row"><label>Name</label><input asp-for="Name" required/></div>
+    <div class="row"><label>Description</label><textarea asp-for="Description"></textarea></div>
+    <div class="row"><label>Product Group</label>
+        <select asp-for="ProductGroupId">
+            <option value="">— None —</option>
+            @foreach (var g in groups!) { <option value="@g.Id">@g.Name</option> }
+        </select></div>
+    <div class="row"><label>Unit of Measure</label>
+        <select asp-for="UnitOfMeasureId" required>
+            @foreach (var u in units!) { <option value="@u.Id">@u.Name (@u.Code)</option> }
+        </select></div>
+    <div class="row"><label>Sales Price</label><input asp-for="SalesPrice" type="number" step="0.01"/></div>
+    <div class="row"><label>Status</label>
+        <select asp-for="Status" asp-items="Html.GetEnumSelectList<Inventory.Models.Status>()"></select></div>
+    <div class="actions"><button class="btn btn-primary">Save</button>
+        <a class="btn btn-secondary" asp-action="Index">Cancel</a></div>
+</form>

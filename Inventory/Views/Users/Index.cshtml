@@ -1,0 +1,13 @@
+@model IEnumerable<Inventory.Models.User>
+@{ ViewData["Title"] = "Users"; }
+<div class="toolbar"><h1>Users</h1><a class="btn btn-primary" asp-action="Create">+ New User</a></div>
+<table>
+<thead><tr><th>Name</th><th>Email</th><th>Mobile</th><th>Status</th><th></th></tr></thead>
+<tbody>
+@foreach (var u in Model) {
+<tr>
+    <td>@u.Name</td><td>@u.Email</td><td>@u.MobileNo</td>
+    <td><span class="badge @(u.Status == Inventory.Models.Status.Active ? "active" : "inactive")">@u.Status</span></td>
+    <td><a asp-action="Edit" asp-route-id="@u.Id">Edit</a></td>
+</tr>}
+</tbody></table>

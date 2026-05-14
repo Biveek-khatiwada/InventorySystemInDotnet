@@ -1,0 +1,16 @@
+@model IEnumerable<Inventory.Models.ProductGroup>
+@{ ViewData["Title"] = "Product Group"; }
+<div class="toolbar"><h1>Product Group</h1><a class="btn btn-primary" asp-action="Create">+ New</a></div>
+<table>
+<thead><tr><th>Name</th><th>Description</th><th>Status</th><th>Created By</th><th></th></tr></thead>
+<tbody>
+@foreach (var x in Model) {
+<tr>
+    <td>@x.Name</td>
+    
+    <td>@x.Description</td>
+    <td><span class="badge @(x.Status == Inventory.Models.Status.Active ? "active" : "inactive")">@x.Status</span></td>
+    <td>@x.User?.Name</td>
+    <td><a asp-action="Edit" asp-route-id="@x.Id">Edit</a></td>
+</tr>}
+</tbody></table>

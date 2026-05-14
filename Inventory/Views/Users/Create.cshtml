@@ -1,0 +1,13 @@
+@model Inventory.Models.User
+@{ ViewData["Title"] = "New User"; }
+<h1>New User</h1>
+<form method="post" class="form">
+    <div class="row"><label>Name</label><input asp-for="Name" required/></div>
+    <div class="row"><label>Email</label><input asp-for="Email" type="email" required/></div>
+    <div class="row"><label>Mobile No</label><input asp-for="MobileNo"/></div>
+    <div class="row"><label>Password</label><input name="password" type="password" required/></div>
+    <div class="row"><label>Status</label>
+        <select asp-for="Status" asp-items="Html.GetEnumSelectList<Inventory.Models.Status>()"></select></div>
+    <div class="actions"><button class="btn btn-primary">Save</button>
+        <a class="btn btn-secondary" asp-action="Index">Cancel</a></div>
+</form>

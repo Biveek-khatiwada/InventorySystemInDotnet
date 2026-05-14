@@ -1,0 +1,25 @@
+@model Inventory.Models.Sale
+@{ ViewData["Title"] = "Sale #" + Model.Id; }
+<div class="toolbar">
+    <h1>Sale #@Model.Id</h1>
+    <a class="btn btn-secondary" asp-action="Index">← Back</a>
+</div>
+<div class="form" style="max-width:none">
+    <p><strong>Date:</strong> @Model.Date.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</p>
+    <p><strong>Customer:</strong> @(Model.Customer?.Name ?? "(walk-in)")</p>
+    <p><strong>Created By:</strong> @Model.User?.Name</p>
+</div>
+<table style="margin-top:1rem">
+<thead><tr><th>Product</th><th>Unit</th><th class="num">Qty</th><th class="num">Price</th><th class="num">Line Total</th></tr></thead>
+<tbody>
+@foreach (var i in Model.Items) {
+<tr>
+    <td>@i.Product?.Name</td><td>@i.Product?.UnitOfMeasure?.Code</td>
+    <td class="num">@i.Quantity</td>
+    <td class="num">@i.Price.ToString("0.00")</td>
+    <td class="num">@i.LineTotal.ToString("0.00")</td>
+</tr>}
+</tbody>
+<tfoot><tr><th colspan="4" class="num">Total</th><th class="num">@Model.TotalAmount.ToString("0.00")</th></tr></tfoot>
+</table>
+<p class="muted" style="margin-top:1rem">Sales entries cannot be edited.</p>

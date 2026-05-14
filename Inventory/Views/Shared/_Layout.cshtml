@@ -1,0 +1,37 @@
+@{ Layout = null; }
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] - Inventory</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+@if (User.Identity?.IsAuthenticated == true)
+{
+    <header class="topbar">
+        <div class="brand">📦 Inventory</div>
+        <nav>
+            <a asp-controller="Stock" asp-action="Index">Stock</a>
+            <a asp-controller="Purchases" asp-action="Index">Purchases</a>
+            <a asp-controller="Sales" asp-action="Index">Sales</a>
+            <a asp-controller="Products" asp-action="Index">Products</a>
+            <a asp-controller="ProductGroups" asp-action="Index">Groups</a>
+            <a asp-controller="Units" asp-action="Index">Units</a>
+            <a asp-controller="Vendors" asp-action="Index">Vendors</a>
+            <a asp-controller="Customers" asp-action="Index">Customers</a>
+            <a asp-controller="Users" asp-action="Index">Users</a>
+        </nav>
+        <div class="user">
+            <span>@User.Identity!.Name</span>
+            <a asp-controller="Account" asp-action="Logout">Logout</a>
+        </div>
+    </header>
+}
+<main class="container">
+    @RenderBody()
+</main>
+<script src="~/js/site.js"></script>
+</body>
+</html>
